@@ -9,15 +9,14 @@ using namespace cmf;
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] const char* argv[])
 {
-    try
+    if (argc < 2)
     {
-        std::cout << "Hell! Oh, world!" << std::endl;
-    }
-    catch (std::exception& ex)
-    {
-        std::cerr << "Back-tester threw an exception: " << ex.what() << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <market_data_file>\n";
         return 1;
     }
-
+    loadMarketData(
+        argv[1],
+        processMarketDataEvent
+    );
     return 0;
 }

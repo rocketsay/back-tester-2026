@@ -26,7 +26,7 @@ struct MarketDataEvent {
         return os;
     }
 
-    static MarketDataEvent fromJson(simdjson::ondemand::object& obj) {
+    static MarketDataEvent fromJson(simdjson::dom::object& obj) {
         MarketDataEvent event;
 
         // простые поля
@@ -39,7 +39,7 @@ struct MarketDataEvent {
         event.flags      = static_cast<int>(obj["flags"].get_int64().value());
 
         auto price_val = obj["price"];
-        if (price_val.type() == simdjson::ondemand::json_type::null) {
+        if (price_val.type() == simdjson::dom::element_type::NULL_VALUE) {
             event.price = 0.0;
         } else {
             std::string_view price_str = price_val.get_string().value();
